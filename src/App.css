@@ -5,3 +5,11 @@
     align-items: center;
     justify-content: center;
 }
+
+span {
+    margin-right: 10px;
+}
+
+.buttonWrapper {
+    margin-left: 35px;
+}

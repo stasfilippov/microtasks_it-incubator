@@ -9,7 +9,7 @@ type CarType = {
 type NewComponentPropsType = {
 	cars: CarType[]
 }
-export const NewComponent = (props: NewComponentPropsType) => {
+export const TableCars = (props: NewComponentPropsType) => {
 	props.cars.map((el, index) => {
 		return el.id = index + 1;
 	})

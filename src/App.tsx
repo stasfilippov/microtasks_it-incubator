@@ -1,43 +1,48 @@
 import React, {useState} from 'react';
 import './App.css'
-// import {Button} from './components/Button';
+import {NewComponent} from './components/NewComponent';
+import {Button} from './components/Button';
 
 function App() {
 
-	// const Button1Foo = (subscriber: string, age: number) => {
-	// 	console.log(subscriber, age)
-	// }
-	//
-	// const Button2Foo = (subscriber: string) => {
-	// 	console.log(subscriber)
-	// }
-	//
-	// const Button3Foo = () => {
-	// 	console.log(' I am stupid button')
-	// }
+	const [money, setMoney] = useState([
+		{ banknots: 'Dollars', value: 100, number: ' a1234567890' },
+		{ banknots: 'Dollars', value: 50, number: ' z1234567890' },
+		{ banknots: 'Rubls', value: 100, number: ' w1234567890' },
+		{ banknots: 'Dollars', value: 100, number: ' e1234567890' },
+		{ banknots: 'Dollars', value: 50, number: ' c1234567890' },
+		{ banknots: 'Rubls', value: 100, number: ' r1234567890' },
+		{ banknots: 'Dollars', value: 50, number: ' x1234567890' },
+		{ banknots: 'Rubls', value: 50, number: ' v1234567890' },
+	])
 
-	let[a, setA] = useState(1);
+	type FilterType = 'All' | 'Dollars' | 'Rubls';
 
-	const onClickHandler = () => {
-		setA(++a);
-		console.log(a)
+	let currentMoney = money;
+
+	let [filter, setFilter] = useState<FilterType>('All')
+
+	const onClickFilterHandler = (nameButton: FilterType) => {
+		setFilter(nameButton)
 	}
 
-	const resetCounter = () => {
-		setA(a = 0)
-		console.log(a)
+	if (filter === 'Dollars') {
+		currentMoney = money.filter((filteredMoney) => filteredMoney.banknots === 'Dollars')
 	}
-
+	if (filter === 'Rubls') {
+		currentMoney = money.filter((filteredMoney) => filteredMoney.banknots === 'Rubls')
+	}
 
 	return (
-		<div className="App">
-			{/*<Button name={'my youtube channel-1'} callBack={() => Button1Foo('I am Vasya', 21)}/>*/}
-			{/*<Button name={'my youtube channel-2'} callBack={() =>Button2Foo('I am Ivan')}/>*/}
-			{/*<Button name={'Stupid-button'} callBack={Button3Foo}/>*/}
-			<h1>{a}</h1>
-			<button onClick={onClickHandler}>number</button>
-			<button onClick={resetCounter}>0</button>
-		</div>
+		<>
+			<NewComponent moneyState = {currentMoney}/>
+			<div className={'buttonWrapper'}>
+				<Button name={'All'} callBack={() => onClickFilterHandler('All')}/>
+				<Button name={'Dollars'} callBack={() => onClickFilterHandler('Dollars')}/>
+				<Button name={'Rubls'} callBack={() => onClickFilterHandler('Rubls')}/>
+			</div>
+
+		</>
 	)
 }
 
